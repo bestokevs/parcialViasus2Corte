@@ -21,12 +21,18 @@ public class SecurityConfiguration {
     // @formatter:off
     http
             .authorizeHttpRequests((authorize) -> authorize
-                //control acces
+                //control access
                 .requestMatchers("/figuras").authenticated()    
                 .requestMatchers("/personalizados").authenticated()
                 .requestMatchers("/peluches").authenticated()
                 .requestMatchers("/ropa").authenticated()
                 .requestMatchers("/accesorios").authenticated()
+                    .requestMatchers("api/createFiguras").authenticated()
+                    .requestMatchers("api/createAccesorios").authenticated()
+                    .requestMatchers("api/createpeluches").authenticated()
+                    .requestMatchers("api/createRopa").authenticated()
+                    .requestMatchers("api/createPersonalizados").authenticated()
+                    .requestMatchers("api/create").authenticated()
 
                 .anyRequest().authenticated()
             )
@@ -43,7 +49,7 @@ public class SecurityConfiguration {
         PasswordEncoder passwordEncoder = passwordEncoder();
         UserDetails user = User.builder()
                 .username("user")
-                .password(passwordEncoder.encode("-Us3rW0rD@-"))
+                .password(passwordEncoder.encode("-*ChAnGuaMiPeRrO*-"))
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);
